@@ -19,7 +19,6 @@
         body { background: var(--page); color: var(--text); padding: 20px; }
         .container { max-width: 1000px; margin: 0 auto; }
         
-        /* Ticker Notification Bar */
         .notification-ticker { background: #fffae6; border: 1px solid #ffe58f; padding: 10px 15px; border-radius: 10px; margin-bottom: 20px; font-size: 0.9rem; color: #8c6d1f; display: flex; align-items: center; justify-content: space-between; }
         
         header { background: linear-gradient(135deg, var(--navy), var(--blue)); color: var(--white); padding: 30px; border-radius: var(--radius); margin-bottom: 20px; }
@@ -46,7 +45,6 @@
         .item-info p { font-size: 0.9rem; color: var(--muted); }
         .item-info img { max-width: 150px; max-height: 150px; border-radius: 6px; margin-top: 8px; display: block; }
         
-        /* Comments Section */
         .comments-section { margin-top: 15px; border-top: 1px dashed var(--line); padding-top: 10px; }
         .comment-item { background: var(--white); padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; font-size: 0.85rem; border: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
         .comment-form { display: flex; gap: 8px; margin-top: 8px; }
@@ -57,7 +55,6 @@
 <body>
 
 <div class="container">
-    <!-- Notification Ticker -->
     <div class="notification-ticker" id="notification-banner">
         <span>📢 <strong>تنبيه القسم:</strong> <span id="ticker-text">أهلاً بكما في بوابة Section B المشتركة!</span></span>
         <button class="btn" id="edit-ticker-btn" style="display:none; padding: 4px 10px; font-size: 0.75rem;" onclick="updateTicker()">تغيير التنبيه</button>
@@ -69,15 +66,14 @@
         <div style="margin-top: 10px; font-size: 0.8rem; background: rgba(255,255,255,0.2); display: inline-block; padding: 4px 10px; border-radius: 20px;">SECTION B - ACADEMIC HUB</div>
     </header>
 
-    <!-- Admin Login Bar -->
     <div class="admin-bar">
-        <span id="admin-status">وضع الزائر (للعرض فقط)</span>
+        <span id="admin-status">وضع الزائر (طالب)</span>
         <button class="btn" id="admin-toggle-btn" onclick="toggleAdmin()">تسجيل مشرف</button>
     </div>
 
-    <!-- Upload Section (Visible to EVERYONE now: Students and Admin) -->
+    <!-- Upload Section - Available to EVERYONE -->
     <div class="card" id="upload-section">
-        <h3>رفع واجب أو ملف جديد</h3>
+        <h3>رفع واجب أو ملف جديد (متاح للجميع)</h3>
         <div class="form-group">
             <label>عنوان الواجب / الملف أو اسم الطالب</label>
             <input type="text" id="item-title" class="form-control" placeholder="مثال: حل واجب البرمجة - [اسم الطالب]">
@@ -93,7 +89,6 @@
         <button class="btn" onclick="addNewItem()">نشر الواجب / الملف</button>
     </div>
 
-    <!-- Display Section -->
     <div class="card">
         <h3>الواجبات والنشاطات الأخيرة والتعليقات</h3>
         <div id="items-container" class="item-list">
@@ -103,7 +98,7 @@
 </div>
 
 <script>
-    let isAdmin = localStorage.getItem('isAdmin') === 'true';
+    let isAdmin = localStorage.getItem('fjw_isAdmin') === 'true';
     updateAdminUI();
     loadTicker();
     loadItems();
@@ -113,7 +108,7 @@
             let pass = prompt("أدخل كلمة المرور الخاصة بالمشرف:");
             if (pass === "admin123") {
                 isAdmin = true;
-                localStorage.setItem('isAdmin', 'true');
+                localStorage.setItem('fjw_isAdmin', 'true');
                 alert("تم تسجيل الدخول كمشرف بنجاح!");
             } else {
                 alert("كلمة المرور غير صحيحة!");
@@ -121,7 +116,7 @@
             }
         } else {
             isAdmin = false;
-            localStorage.setItem('isAdmin', 'false');
+            localStorage.setItem('fjw_isAdmin', 'false');
             alert("تم تسجيل الخروج من وضع المشرف.");
         }
         updateAdminUI();
@@ -190,9 +185,9 @@
     }
 
     function saveAndRender(item) {
-        let items = JSON.parse(localStorage.getItem('fjw_items') || '[]');
+        let items = JSON.parse(localStorage.getItem('fjw_items_list') || '[]');
         items.unshift(item);
-        localStorage.setItem('fjw_items', JSON.stringify(items));
+        localStorage.setItem('fjw_items_list', JSON.stringify(items));
         
         document.getElementById('item-title').value = '';
         document.getElementById('item-desc').value = '';
@@ -203,7 +198,7 @@
 
     function loadItems() {
         const container = document.getElementById('items-container');
-        let items = JSON.parse(localStorage.getItem('fjw_items') || '[]');
+        let items = JSON.parse(localStorage.getItem('fjw_items_list') || '[]');
 
         if (items.length === 0) {
             container.innerHTML = `<p style="color: var(--muted); text-align: center; padding: 20px;">لا توجد واجبات مضافة حتى الآن.</p>`;
@@ -223,7 +218,6 @@
 
             let deleteBtn = isAdmin ? `<button class="btn btn-danger" onclick="deleteItem(${item.id})" style="padding: 5px 10px; font-size: 0.8rem;">حذف الواجب</button>` : '';
 
-            // Render Comments
             let commentsHtml = '';
             if (item.comments && item.comments.length > 0) {
                 item.comments.forEach((comm, cIndex) => {
@@ -270,32 +264,32 @@
         const commentText = input.value.trim();
         if (!commentText) return;
 
-        let items = JSON.parse(localStorage.getItem('fjw_items') || '[]');
+        let items = JSON.parse(localStorage.getItem('fjw_items_list') || '[]');
         let targetItem = items.find(i => i.id === itemId);
         if (targetItem) {
             if (!targetItem.comments) targetItem.comments = [];
             targetItem.comments.push(commentText);
-            localStorage.setItem('fjw_items', JSON.stringify(items));
+            localStorage.setItem('fjw_items_list', JSON.stringify(items));
             loadItems();
         }
     }
 
     function deleteComment(itemId, commentIndex) {
         if (!confirm("هل تريد حذف هذا التعليق؟")) return;
-        let items = JSON.parse(localStorage.getItem('fjw_items') || '[]');
+        let items = JSON.parse(localStorage.getItem('fjw_items_list') || '[]');
         let targetItem = items.find(i => i.id === itemId);
         if (targetItem && targetItem.comments) {
             targetItem.comments.splice(commentIndex, 1);
-            localStorage.setItem('fjw_items', JSON.stringify(items));
+            localStorage.setItem('fjw_items_list', JSON.stringify(items));
             loadItems();
         }
     }
 
     function deleteItem(id) {
         if (!confirm("هل أنت متأكد من حذف هذا الواجب كاملاً؟")) return;
-        let items = JSON.parse(localStorage.getItem('fjw_items') || '[]');
+        let items = JSON.parse(localStorage.getItem('fjw_items_list') || '[]');
         items = items.filter(item => item.id !== id);
-        localStorage.setItem('fjw_items', JSON.stringify(items));
+        localStorage.setItem('fjw_items_list', JSON.stringify(items));
         loadItems();
     }
 
@@ -305,5 +299,5 @@
 </script>
 
 </body>
-</html>    
+</html>
 </html>
