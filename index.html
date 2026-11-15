@@ -75,12 +75,12 @@
         <button class="btn" id="admin-toggle-btn" onclick="toggleAdmin()">تسجيل مشرف</button>
     </div>
 
-    <!-- Upload Section (Visible to Admin Only) -->
-    <div class="card" id="upload-section" style="display: none;">
-        <h3>إضافة واجب أو ملف جديد</h3>
+    <!-- Upload Section (Visible to EVERYONE now: Students and Admin) -->
+    <div class="card" id="upload-section">
+        <h3>رفع واجب أو ملف جديد</h3>
         <div class="form-group">
-            <label>عنوان الواجب / الملف</label>
-            <input type="text" id="item-title" class="form-control" placeholder="مثال: واجب المادة البرمجية الأسبوع الأول">
+            <label>عنوان الواجب / الملف أو اسم الطالب</label>
+            <input type="text" id="item-title" class="form-control" placeholder="مثال: حل واجب البرمجة - [اسم الطالب]">
         </div>
         <div class="form-group">
             <label>الوصف أو التفاصيل</label>
@@ -90,7 +90,7 @@
             <label>اختر صورة أو ملف (اختياري)</label>
             <input type="file" id="item-file" class="form-control" accept="image/*,.pdf,.doc,.docx">
         </div>
-        <button class="btn" onclick="addNewItem()">نشر المحتوى</button>
+        <button class="btn" onclick="addNewItem()">نشر الواجب / الملف</button>
     </div>
 
     <!-- Display Section -->
@@ -130,18 +130,15 @@
     function updateAdminUI() {
         const statusEl = document.getElementById('admin-status');
         const btnEl = document.getElementById('admin-toggle-btn');
-        const uploadEl = document.getElementById('upload-section');
         const tickerBtn = document.getElementById('edit-ticker-btn');
 
         if (isAdmin) {
             statusEl.textContent = "أنت مسجل حالياً كـ [مشرف]";
             btnEl.textContent = "تسجيل خروج";
-            uploadEl.style.display = "block";
             tickerBtn.style.display = "inline-block";
         } else {
-            statusEl.textContent = "وضع الزائر (للعرض فقط)";
+            statusEl.textContent = "وضع الزائر (طالب)";
             btnEl.textContent = "تسجيل مشرف";
-            uploadEl.style.display = "none";
             tickerBtn.style.display = "none";
         }
         loadItems();
@@ -166,7 +163,7 @@
         const fileInput = document.getElementById('item-file');
 
         if (!title) {
-            alert("الرجاء إدخال عنوان للمحتوى على الأقل.");
+            alert("الرجاء إدخال عنوان أو اسم للواجب.");
             return;
         }
 
@@ -308,5 +305,5 @@
 </script>
 
 </body>
-</html> 
+</html>    
 </html>
