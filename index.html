@@ -1,778 +1,222 @@
-HTML
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FJW. — Section B</title>
-
-<style>
-:root {
-    --navy: #14253d;
-    --blue: #294f7d;
-    --page: #f3f5fa;
-    --text: #202a39;
-    --muted: #7d8796;
-    --line: #e8ebf0;
-    --white: #fff;
-    --radius: 16px;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background: var(--page);
-    color: var(--text);
-    font-family: Inter, "Segoe UI", Arial, sans-serif;
-    font-size: 14px;
-}
-
-button {
-    font: inherit;
-}
-
-/* HEADER */
-
-.topbar {
-    min-height: 132px;
-    background: var(--navy);
-    color: white;
-    padding: 16px 18px 0;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    height: 54px;
-    margin-bottom: 14px;
-}
-
-.logo {
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-items: center;
-    border-radius: 12px;
-    background: #315f99;
-    font-weight: 800;
-}
-
-.brand-name {
-    font-weight: 800;
-    font-size: 16px;
-}
-
-.brand-sub {
-    margin-top: 5px;
-    color: #a9b6c8;
-    font-size: 10px;
-    letter-spacing: 1.4px;
-}
-
-/* NAVIGATION */
-
-.nav {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.nav::-webkit-scrollbar {
-    display: none;
-}
-
-.nav button {
-    border: 0;
-    color: #c4ccda;
-    background: transparent;
-    padding: 12px 14px;
-    border-radius: 11px 11px 0 0;
-    white-space: nowrap;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.nav button.active,
-.nav button:hover {
-    background: #243b5a;
-    color: white;
-}
-
-/* BREADCRUMB */
-
-.crumbbar {
-    height: 58px;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 18px;
-    color: #8b929d;
-    border-bottom: 1px solid var(--line);
-}
-
-.crumbbar strong {
-    color: #344052;
-}
-
-.avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: #e8eff9;
-    color: #31577f;
-    display: grid;
-    place-items: center;
-    font-weight: 700;
-}
-
-/* MAIN */
-
-main {
-    max-width: 1500px;
-    margin: auto;
-    padding: 25px 17px 40px;
-}
-
-.eyebrow {
-    color: #49698e;
-    font-size: 11px;
-    letter-spacing: 1.6px;
-    font-weight: 800;
-    margin-bottom: 14px;
-}
-
-h1 {
-    margin: 0;
-    font-size: clamp(25px, 3vw, 32px);
-    letter-spacing: -.8px;
-}
-
-.intro {
-    color: var(--muted);
-    font-size: 15px;
-    margin: 10px 0 27px;
-}
-
-/* HERO */
-
-.hero {
-    background: linear-gradient(110deg, #172d4a, #315982);
-    color: white;
-    border-radius: 18px;
-    min-height: 165px;
-    padding: 29px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-bottom: 21px;
-}
-
-.hero h2 {
-    margin: 0 0 10px;
-    font-size: 21px;
-}
-
-.hero p {
-    margin: 0 0 20px;
-    color: #d0d9e7;
-}
-
-.hero-tag {
-    display: inline-block;
-    width: fit-content;
-    border: 1px solid #8ba0bb88;
-    border-radius: 9px;
-    padding: 10px 13px;
-    color: #e5ebf4;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .7px;
-}
-
-/* STATISTICS */
-
-.stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 28px;
-}
-
-.stat,
-.panel,
-.quick-card,
-.noticeboard {
-    background: var(--white);
-    border: 1px solid #edf0f4;
-    border-radius: var(--radius);
-    box-shadow: 0 1px 2px #17253b08;
-}
-
-.stat {
-    min-height: 98px;
-    padding: 13px;
-}
-
-.stat.deadlines {
-    grid-column: 1 / -1;
-    min-height: 100px;
-}
-
-.stat-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #858d99;
-    font-size: 12px;
-}
-
-.stat-icon,
-.activity-icon {
-    width: 34px;
-    height: 34px;
-    display: grid;
-    place-items: center;
-    border-radius: 10px;
-    background: #eff4fa;
-    color: #55799f;
-}
-
-.stat-value {
-    font-size: 23px;
-    font-weight: 700;
-    margin-top: 10px;
-}
-
-/* QUICK ACCESS */
-
-h3.section-title {
-    font-size: 16px;
-    margin: 0 0 14px;
-}
-
-.quick-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 11px;
-    margin-bottom: 31px;
-}
-
-.quick-card {
-    min-height: 94px;
-    padding: 15px;
-    text-align: left;
-    cursor: pointer;
-    color: inherit;
-    transition: transform .15s, box-shadow .15s;
-}
-
-.quick-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px #17253b12;
-}
-
-.quick-symbol {
-    display: block;
-    font-size: 19px;
-    margin-bottom: 8px;
-    color: #56616f;
-}
-
-.quick-card strong {
-    display: block;
-    font-size: 12px;
-    margin-bottom: 3px;
-}
-
-.quick-card small {
-    color: #9299a4;
-    font-size: 11px;
-}
-
-/* RECENT ACTIVITY */
-
-.section-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 13px;
-}
-
-.section-heading h3 {
-    margin: 0;
-    font-size: 16px;
-}
-
-.view-all {
-    color: #54769d;
-    font-weight: 700;
-    font-size: 12px;
-    cursor: pointer;
-    border: 0;
-    background: none;
-}
-
-.panel {
-    padding: 14px 18px;
-    margin-bottom: 31px;
-}
-
-.activity-row {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    padding: 15px 0;
-    border-bottom: 1px solid var(--line);
-}
-
-.activity-row:last-child {
-    border-bottom: 0;
-}
-
-.activity-icon {
-    flex: 0 0 36px;
-}
-
-.activity-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.activity-info strong {
-    display: block;
-    font-size: 13px;
-    margin-bottom: 5px;
-}
-
-.activity-info small {
-    color: #9299a4;
-    font-size: 11px;
-}
-
-.pill {
-    color: #66809f;
-    background: #eff4fa;
-    border-radius: 20px;
-    padding: 6px 10px;
-    font-size: 10px;
-    white-space: nowrap;
-}
-
-/* NOTICEBOARD */
-
-.noticeboard {
-    padding: 19px;
-}
-
-.notice {
-    padding: 15px 0;
-    border-bottom: 1px solid var(--line);
-}
-
-.notice:last-child {
-    border-bottom: 0;
-    padding-bottom: 4px;
-}
-
-.notice strong {
-    display: block;
-    font-size: 13px;
-    margin-bottom: 6px;
-}
-
-.notice p {
-    margin: 0;
-    color: #9299a4;
-    font-size: 11px;
-}
-
-/* TOAST MESSAGE */
-
-.toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translate(-50%, 20px);
-    background: #172d4a;
-    color: white;
-    padding: 12px 18px;
-    border-radius: 10px;
-    opacity: 0;
-    pointer-events: none;
-    transition: .2s;
-    box-shadow: 0 8px 24px #0002;
-}
-
-.toast.show {
-    opacity: 1;
-    transform: translate(-50%, 0);
-}
-
-/* RESPONSIVE DESIGN */
-
-@media (min-width: 760px) {
-    .topbar {
-        padding-left: 28px;
-        padding-right: 28px;
-    }
-    .crumbbar {
-        padding: 0 28px;
-    }
-    main {
-        padding: 30px 28px 50px;
-    }
-    .hero {
-        min-height: 165px;
-        padding: 32px;
-    }
-    .stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-    .stat.deadlines {
-        grid-column: 1 / -1;
-    }
-    .quick-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-    .quick-card:last-child {
-        grid-column: 1 / 2;
-    }
-}
-
-@media (min-width: 1100px) {
-    main {
-        padding-left: 34px;
-        padding-right: 34px;
-    }
-    .stats {
-        grid-template-columns: 1fr 1fr 2fr;
-    }
-    .stat.deadlines {
-        grid-column: auto;
-    }
-    .quick-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .quick-card:last-child {
-        grid-column: auto;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FJW. — Section B</title>
+    <style>
+        :root {
+            --navy: #14253d;
+            --blue: #294f74;
+            --page: #f3f5fa;
+            --text: #202a39;
+            --muted: #7d8799;
+            --line: #d8ebf0;
+            --white: #fff;
+            --radius: 16px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background: var(--page); color: var(--text); padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        header { background: linear-gradient(135deg, var(--navy), var(--blue)); color: var(--white); padding: 30px; border-radius: var(--radius); margin-bottom: 20px; }
+        header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        header p { color: var(--line); font-size: 0.95rem; }
+        
+        .card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+        .card h3 { margin-bottom: 15px; color: var(--navy); font-size: 1.2rem; }
+        
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; color: var(--muted); }
+        .form-control { width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 8px; font-size: 0.95rem; }
+        
+        .btn { background: var(--blue); color: var(--white); border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .btn:hover { background: var(--navy); }
+        .btn-danger { background: #d9534f; }
+        
+        .admin-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: var(--white); padding: 15px 20px; border-radius: var(--radius); border: 1px solid var(--line); }
+        
+        .item-list { display: grid; gap: 12px; }
+        .item-card { background: var(--page); padding: 15px; border-radius: 10px; border: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+        .item-info h4 { color: var(--navy); margin-bottom: 4px; }
+        .item-info p { font-size: 0.9rem; color: var(--muted); }
+        .item-info img { max-width: 100px; max-height: 100px; border-radius: 6px; margin-top: 8px; display: block; }
+    </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
-<header class="topbar">
-    <div class="brand">
-        <div class="logo">FJ</div>
-        <div>
-            <div class="brand-name">FJW.</div>
-            <div class="brand-sub">SECTION B</div>
-        </div>
+<div class="container">
+    <header>
+        <h1>One class. One shared space.</h1>
+        <p>Assignments, presentations, resources and class updates, organized together.</p>
+        <div style="margin-top: 10px; font-size: 0.8rem; background: rgba(255,255,255,0.2); display: inline-block; padding: 4px 10px; border-radius: 20px;">SECTION B - ACADEMIC HUB</div>
+    </header>
+
+    <!-- Admin Login Bar -->
+    <div class="admin-bar">
+        <span id="admin-status">وضع الزائر (للعرض فقط)</span>
+        <button class="btn" id="admin-toggle-btn" onclick="toggleAdmin()">تسجيل مشرف</button>
     </div>
 
-    <!-- NAVIGATION -->
-    <nav class="nav">
-        <button class="active" data-page="Overview">⌂ &nbsp; Overview</button>
-        <button data-page="Assignments">▤ &nbsp; Assignments</button>
-        <button data-page="Class Resources">▧ &nbsp; Class Resources</button>
-        <button data-page="Calendar & Deadlines">◷ &nbsp; Calendar & Deadlines</button>
-        <button data-page="Announcements">✦ &nbsp; Announcements</button>
-        <button data-page="Class Members">♧ &nbsp; Class Members</button>
-    </nav>
-</header>
+    <!-- Upload Section (Visible to Admin Only) -->
+    <div class="card" id="upload-section" style="display: none;">
+        <h3>إضافة واجب أو ملف جديد</h3>
+        <div class="form-group">
+            <label>عنوان الواجب / الملف</label>
+            <input type="text" id="item-title" class="form-control" placeholder="مثال: واجب المادة البرمجية الأسبوع الأول">
+        </div>
+        <div class="form-group">
+            <label>الوصف أو التفاصيل</label>
+            <textarea id="item-desc" class="form-control" rows="3" placeholder="اكتب التفاصيل هنا..."></textarea>
+        </div>
+        <div class="form-group">
+            <label>اختر صورة أو ملف (اختياري)</label>
+            <input type="file" id="item-file" class="form-control" accept="image/*,.pdf,.doc,.docx">
+        </div>
+        <button class="btn" onclick="addNewItem()">نشر المحتوى</button>
+    </div>
 
-<!-- BREADCRUMB -->
-<div class="crumbbar">
-    <div>Workspace / <strong id="currentPage">Overview</strong></div>
-    
-    <div style="display: flex; gap: 10px; align-items: center;">
-        <button id="adminToggleBtn" onclick="toggleAdminMode()" style="background: #294f7d; color: white; border: none; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 11px; font-weight: 600;">
-            تسجيل مشرف
-        </button>
-        <div class="avatar">S</div>
+    <!-- Display Section -->
+    <div class="card">
+        <h3>الواجبات والنشاطات الأخيرة</h3>
+        <div id="items-container" class="item-list">
+            <p style="color: var(--muted); text-align: center; padding: 20px;">لا توجد واجبات مضافة حتى الآن.</p>
+        </div>
     </div>
 </div>
 
-<!-- MAIN CONTENT -->
-<main>
-    <div class="eyebrow">FOREIGN JOURNALISM WRITING · SECTION B</div>
-    <h1>Welcome to your class space.</h1>
-    <p class="intro">Everything your section shares, learns, and works on — in one place.</p>
-
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <h2>One class. One shared space.</h2>
-        <p>Assignments, presentations, resources and class updates, organized together.</p>
-        <span class="hero-tag">SECTION B · ACADEMIC HUB</span>
-    </section>
-
-    <!-- STATISTICS -->
-    <section class="stats">
-        <div class="stat">
-            <div class="stat-top">
-                <span>Class members</span>
-                <span class="stat-icon">♧</span>
-            </div>
-            <div class="stat-value">—</div>
-        </div>
-        <div class="stat">
-            <div class="stat-top">
-                <span>Shared files</span>
-                <span class="stat-icon">▤</span>
-            </div>
-            <div class="stat-value">—</div>
-        </div>
-        <div class="stat deadlines">
-            <div class="stat-top">
-                <span>Upcoming deadlines</span>
-                <span class="stat-icon">◷</span>
-            </div>
-            <div class="stat-value">—</div>
-        </div>
-    </section>
-
-    <!-- QUICK ACCESS -->
-    <h3 class="section-title">Quick access</h3>
-    <section class="quick-grid">
-        <button class="quick-card" data-action="Share an assignment">
-            <span class="quick-symbol">＋</span>
-            <strong>Share an assignment</strong>
-            <small>Upload your work</small>
-        </button>
-        <button class="quick-card" data-action="Browse resources">
-            <span class="quick-symbol">▧</span>
-            <strong>Browse resources</strong>
-            <small>Notes and presentations</small>
-        </button>
-        <button class="quick-card" data-action="Class announcement">
-            <span class="quick-symbol">✎</span>
-            <strong>Class announcement</strong>
-            <small>Share an update</small>
-        </button>
-    </section>
-
-    <!-- RECENT ACTIVITY -->
-    <div class="section-heading">
-        <h3>Recent class activity</h3>
-        <button class="view-all" data-action="View all activity">View all</button>
-    </div>
-
-    <section class="panel">
-        <div class="activity-row">
-            <div class="activity-icon">▤</div>
-            <div class="activity-info">
-                <strong>Assignments and submissions</strong>
-                <small>Student uploads will appear here.</small>
-            </div>
-            <span class="pill">Assignments</span>
-        </div>
-        <div class="activity-row">
-            <div class="activity-icon">▧</div>
-            <div class="activity-info">
-                <strong>Shared study materials</strong>
-                <small>Class notes, PDFs and presentations.</small>
-            </div>
-            <span class="pill">Resources</span>
-        </div>
-        <div class="activity-row">
-            <div class="activity-icon">✦</div>
-            <div class="activity-info">
-                <strong>Class announcements</strong>
-                <small>Important updates for Section B.</small>
-            </div>
-            <span class="pill">Updates</span>
-        </div>
-    </section>
-
-    <!-- NOTICEBOARD -->
-    <h3 class="section-title">Class noticeboard</h3>
-    <section class="noticeboard">
-        <div id="noticesList">
-            <!-- سيتم تعبئة الإعلانات هنا تلقائياً -->
-        </div>
-    </section>
-</main>
-
-<!-- TOAST MESSAGE -->
-<div class="toast" id="toast" role="status"></div>
-
-<!-- JAVASCRIPT -->
 <script>
-const toast = document.getElementById("toast");
-let toastTimer;
+    let isAdmin = localStorage.getItem('isAdmin') === 'true';
+    updateAdminUI();
+    loadItems();
 
-function showToast(message) {
-    toast.textContent = message;
-    toast.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-    }, 2200);
-}
+    function toggleAdmin() {
+        if (!isAdmin) {
+            let pass = prompt("أدخل كلمة المرور الخاصة بالمشرف:");
+            if (pass === "admin123") {
+                isAdmin = true;
+                localStorage.setItem('isAdmin', 'true');
+                alert("تم تسجيل الدخول كمشرف بنجاح!");
+            } else {
+                alert("كلمة المرور غير صحيحة!");
+                return;
+            }
+        } else {
+            isAdmin = false;
+            localStorage.setItem('isAdmin', 'false');
+            alert("تم تسجيل الخروج من وضع المشرف.");
+        }
+        updateAdminUI();
+    }
 
-// NAVIGATION
-document.querySelectorAll(".nav button").forEach(button => {
-    button.addEventListener("click", () => {
-        document.querySelectorAll(".nav button").forEach(item => {
-            item.classList.remove("active");
+    function updateAdminUI() {
+        const statusEl = document.getElementById('admin-status');
+        const btnEl = document.getElementById('admin-toggle-btn');
+        const uploadEl = document.getElementById('upload-section');
+
+        if (isAdmin) {
+            statusEl.textContent = "أنت مسجل حالياً كـ [مشرف]";
+            btnEl.textContent = "تسجيل خروج";
+            uploadEl.style.display = "block";
+        } else {
+            statusEl.textContent = "وضع الزائر (للعرض فقط)";
+            btnEl.textContent = "تسجيل مشرف";
+            uploadEl.style.display = "none";
+        }
+        loadItems();
+    }
+
+    function addNewItem() {
+        const title = document.getElementById('item-title').value.trim();
+        const desc = document.getElementById('item-desc').value.trim();
+        const fileInput = document.getElementById('item-file');
+
+        if (!title) {
+            alert("الرجاء إدخال عنوان للمحتوى على الأقل.");
+            return;
+        }
+
+        let newItem = {
+            id: Date.now(),
+            title: title,
+            desc: desc,
+            fileData: null,
+            fileName: null
+        };
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                newItem.fileData = e.target.result;
+                newItem.fileName = fileInput.files[0].name;
+                saveAndRender(newItem);
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            saveAndRender(newItem);
+        }
+    }
+
+    function saveAndRender(item) {
+        let items = JSON.parse(localStorage.getItem('fjw_items') || '[]');
+        items.unshift(item);
+        localStorage.setItem('fjw_items', JSON.stringify(items));
+        
+        document.getElementById('item-title').value = '';
+        document.getElementById('item-desc').value = '';
+        document.getElementById('item-file').value = '';
+        
+        loadItems();
+    }
+
+    function loadItems() {
+        const container = document.getElementById('items-container');
+        let items = JSON.parse(localStorage.getItem('fjw_items') || '[]');
+
+        if (items.length === 0) {
+            container.innerHTML = `<p style="color: var(--muted); text-align: center; padding: 20px;">لا توجد واجبات مضافة حتى الآن.</p>`;
+            return;
+        }
+
+        container.innerHTML = '';
+        items.forEach(item => {
+            let fileElement = '';
+            if (item.fileData) {
+                if (item.fileData.startsWith('data:image/')) {
+                    fileElement = `<img src="${item.fileData}" alt="Uploaded image">`;
+                } else {
+                    fileElement = `<p style="margin-top: 5px;"><a href="${item.fileData}" download="${item.fileName}" target="_blank">📥 تحميل الملف: ${item.fileName}</a></p>`;
+                }
+            }
+
+            let deleteBtn = isAdmin ? `<button class="btn btn-danger" onclick="deleteItem(${item.id})" style="padding: 5px 10px; font-size: 0.8rem;">حذف</button>` : '';
+
+            const div = document.createElement('div');
+            div.className = 'item-card';
+            div.innerHTML = `
+                <div class="item-info">
+                    <h4>${escapeHtml(item.title)}</h4>
+                    <p>${escapeHtml(item.desc || '')}</p>
+                    ${fileElement}
+                </div>
+                ${deleteBtn}
+            `;
+            container.appendChild(div);
         });
-        button.classList.add("active");
-        document.getElementById("currentPage").textContent = button.dataset.page;
-
-        if (button.dataset.page !== "Overview") {
-            showToast(button.dataset.page + " page selected — add its content here.");
-        }
-    });
-});
-
-// QUICK ACCESS BUTTONS
-document.querySelectorAll("[data-action]").forEach(button => {
-    button.addEventListener("click", () => {
-        showToast(button.dataset.action + " selected");
-    });
-});
-
-// --- NOTICEBOARD & ADMIN LOGIC ---
-
-const defaultNotices = [
-    {
-        id: 1,
-        title: "Welcome to FJW — Section B",
-        desc: "Your shared academic space starts here. Keep class materials organized and easy to find."
-    },
-    {
-        id: 2,
-        title: "Open collaboration",
-        desc: "Students can share useful class-related work and resources."
     }
-];
 
-function getNotices() {
-    const saved = localStorage.getItem("fjw_notices");
-    if (saved) {
-        return JSON.parse(saved);
+    function deleteItem(id) {
+        if (!confirm("هل أنت متأكد من حذف هذا العنصر؟")) return;
+        let items = JSON.parse(localStorage.getItem('fjw_items') || '[]');
+        items = items.filter(item => item.id !== id);
+        localStorage.setItem('fjw_items', JSON.stringify(items));
+        loadItems();
     }
-    localStorage.setItem("fjw_notices", JSON.stringify(defaultNotices));
-    return defaultNotices;
-}
 
-function saveNotices(notices) {
-    localStorage.setItem("fjw_notices", JSON.stringify(notices));
-}
-
-function renderNotices() {
-    const noticesList = document.getElementById("noticesList");
-    const notices = getNotices();
-    const isAdmin = localStorage.getItem("isAdmin") === "true";
-
-    noticesList.innerHTML = "";
-
-    notices.forEach(notice => {
-        const noticeDiv = document.createElement("div");
-        noticeDiv.className = "notice";
-        noticeDiv.style.display = "flex";
-        noticeDiv.style.justifyContent = "space-between";
-        noticeDiv.style.alignItems = "flex-start";
-        noticeDiv.style.gap = "10px";
-
-        noticeDiv.innerHTML = `
-            <div>
-                <strong>${notice.title}</strong>
-                <p>${notice.desc}</p>
-            </div>
-            ${isAdmin ? `
-                <button onclick="deleteNotice(${notice.id})" 
-                        style="background: #fee2e2; color: #b91c1c; border: none; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: 600;">
-                    حذف
-                </button>
-            ` : ""}
-        `;
-        noticesList.appendChild(noticeDiv);
-    });
-}
-
-function addNewNotice() {
-    const title = prompt("عنوان الإعلان:");
-    if (!title) return;
-
-    const desc = prompt("نص الإعلان:");
-    if (!desc) return;
-
-    const notices = getNotices();
-    const newNotice = {
-        id: Date.now(),
-        title: title,
-        desc: desc
-    };
-
-    notices.unshift(newNotice);
-    saveNotices(notices);
-    renderNotices();
-    showToast("تم حفظ الإعلان بنجاح!");
-}
-
-function deleteNotice(id) {
-    if (!confirm("هل أنت متأكد من حذف هذا الإعلان؟")) return;
-
-    let notices = getNotices();
-    notices = notices.filter(n => n.id !== id);
-    saveNotices(notices);
-    renderNotices();
-    showToast("تم حذف الإعلان.");
-}
-
-function toggleAdminMode() {
-    const isAdmin = localStorage.getItem("isAdmin") === "true";
-    
-    if (!isAdmin) {
-        let pass = prompt("أدخل كلمة مرور المشرف:");
-        if (pass === "admin123") {
-            localStorage.setItem("isAdmin", "true");
-            showToast("تم تفعيل صلاحيات المشرف بنجاح!");
-            setTimeout(() => location.reload(), 1000);
-        } else if (pass !== null) {
-            showToast("كلمة المرور غير صحيحة!");
-        }
-    } else {
-        localStorage.removeItem("isAdmin");
-        showToast("تم إيقاف صلاحيات المشرف");
-        setTimeout(() => location.reload(), 1000);
+    function escapeHtml(text) {
+        return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-    renderNotices();
-
-    const isAdmin = localStorage.getItem("isAdmin") === "true";
-    const btn = document.getElementById("adminToggleBtn");
-
-    if (isAdmin) {
-        if (btn) {
-            btn.textContent = "خروج المشرف";
-            btn.style.background = "#d9534f";
-        }
-
-        const noticeboard = document.querySelector(".noticeboard");
-        if (noticeboard) {
-            const addNoticeBtn = document.createElement("button");
-            addNoticeBtn.textContent = "＋ إضافة إعلان جديد (مشرف)";
-            addNoticeBtn.style.cssText = "width: 100%; margin-top: 14px; padding: 10px; background: #14253d; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;";
-            addNoticeBtn.onclick = addNewNotice;
-            noticeboard.appendChild(addNoticeBtn);
-        }
-    }
-});
 </script>
 
 </body>
+</html>
 </html>
